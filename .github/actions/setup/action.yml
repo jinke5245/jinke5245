@@ -1,0 +1,25 @@
+name: setup
+description: setup node, pnpm, and project dependencies
+
+inputs:
+  node-version-file:
+    description: path to the node version file
+    required: false
+    default: .node-version
+
+runs:
+  using: composite
+  steps:
+    - name: enable corepack
+      shell: bash
+      run: corepack enable
+
+    - name: setup node
+      uses: actions/setup-node@v6
+      with:
+        node-version-file: ${{ inputs.node-version-file }}
+        cache: pnpm
+
+    - name: install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile

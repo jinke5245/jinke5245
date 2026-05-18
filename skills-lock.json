@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "github-workflow": {
+      "source": "jinke5245/skills",
+      "sourceType": "github",
+      "skillPath": "skills/github-workflow/SKILL.md",
+      "computedHash": "8ac955aa6214efeed5a74f02095b476854b7d9104cf7fcffc137a1d8d7353e7e"
+    }
+  }
+}

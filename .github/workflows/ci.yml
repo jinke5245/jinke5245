@@ -1,0 +1,34 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: check
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+
+      - name: setup
+        uses: ./.github/actions/setup
+
+      - name: check
+        run: pnpm run check
+
+      - name: check github pages build
+        env:
+          PUBLIC_BASE: /jinke5245
+          PUBLIC_SITE: https://jinke5245.github.io
+        run: pnpm run build

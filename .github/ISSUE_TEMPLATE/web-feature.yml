@@ -1,0 +1,38 @@
+name: Web feature request
+description: Add or change site behavior, layout, routing, styling, or publishing.
+title: 'feat: '
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Profile homepage
+        - Blog
+        - Navigation
+        - Design system
+        - SEO or metadata
+        - Build or deployment
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User story
+      description: Who is this for, and what should they be able to do?
+      placeholder: 'As a reader, I want...'
+    validations:
+      required: true
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Requirements
+      description: List the visible behavior, content, states, and constraints.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation
+      description: List checks, browser review steps, screenshots, or build commands.
