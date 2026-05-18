@@ -1,31 +1,17 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import {
+  getActiveNavigationState,
+  resolveNavigationHref,
+} from '../utils/navigation';
 
 type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
 const hrefValue = href?.toString() ?? '';
-const base = import.meta.env.BASE_URL;
-const basePath = base.endsWith('/') ? base.slice(0, -1) : base;
-const pathname = basePath
-  ? Astro.url.pathname.replace(basePath, '') || '/'
-  : Astro.url.pathname;
-const normalizedPath =
-  pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
-const normalizedHref =
-  hrefValue !== '/' && hrefValue.endsWith('/')
-    ? hrefValue.slice(0, -1)
-    : hrefValue;
-const subpath = normalizedPath.match(/[^/]+/g);
-const isActive =
-  normalizedHref === normalizedPath ||
-  normalizedHref === '/' + (subpath?.[0] || '');
-const isSpecialHref =
-  hrefValue.startsWith('#') || /^[a-z][a-z\d+.-]*:/i.test(hrefValue);
-const normalizedBase = base.endsWith('/') ? base : `${base}/`;
-const resolvedHref = isSpecialHref
-  ? hrefValue
-  : `${normalizedBase}${hrefValue.replace(/^\/+/, '')}`;
+const isActive = getActiveNavigationState(Astro.url.pathname, hrefValue);
+// Unsafe URL schemes fail the build so navigation links cannot silently ship dangerous hrefs.
+const resolvedHref = resolveNavigationHref(hrefValue);
 ---
 
 <a

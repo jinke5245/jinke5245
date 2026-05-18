@@ -6,12 +6,24 @@ import { defineConfig, fontProviders } from 'astro/config';
 import process from 'node:process';
 
 const site = process.env.PUBLIC_SITE ?? 'https://jinke.dev';
-const base = process.env.PUBLIC_BASE || undefined;
+const publicBase = process.env.PUBLIC_BASE;
+
+if (publicBase === '') {
+  throw new Error('PUBLIC_BASE must be unset or a non-empty path.');
+}
+
+if (publicBase !== undefined && !publicBase.startsWith('/')) {
+  throw new Error('PUBLIC_BASE must start with a leading slash.');
+}
+
+if (publicBase !== undefined && publicBase.endsWith('/')) {
+  throw new Error('PUBLIC_BASE must not end with a trailing slash.');
+}
 
 // https://astro.build/config
 export default defineConfig({
   site,
-  base,
+  base: publicBase,
   integrations: [mdx(), sitemap()],
   fonts: [
     {

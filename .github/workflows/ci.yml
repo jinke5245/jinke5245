@@ -25,10 +25,16 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: check
-        run: pnpm run check
+        run: pnpm run check:ci
+
+      - name: check cloudflare pages build
+        run: pnpm run build
+
+      - name: clean build artifacts
+        run: pnpm run clean
 
       - name: check github pages build
         env:
-          PUBLIC_BASE: /jinke5245
-          PUBLIC_SITE: https://jinke5245.github.io
+          PUBLIC_BASE: /${{ github.event.repository.name }}
+          PUBLIC_SITE: https://${{ github.repository_owner }}.github.io
         run: pnpm run build

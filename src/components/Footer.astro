@@ -1,10 +1,10 @@
 ---
-const today = new Date();
+import { SITE_COPYRIGHT_START_YEAR } from '../consts';
+
+// TODO: Review this copyright range annually.
 ---
 
-<footer>
-  &copy; {today.getFullYear()} jinke.
-</footer>
+<footer>&copy; {SITE_COPYRIGHT_START_YEAR}-present jinke.</footer>
 <style>
   footer {
     padding: 2em 1em 6em 1em;

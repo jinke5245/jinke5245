@@ -20,6 +20,7 @@
     "@types/node": "^25.8.0",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^1.7.0",
     "eslint-plugin-mdx": "^3.7.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.5",
@@ -28,17 +29,21 @@
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.3",
+    "vitest": "^4.1.6",
     "yaml": "^2.9.0"
   },
   "scripts": {
     "prepare": "husky",
-    "check": "pnpm run lint && pnpm run format:check && pnpm run typecheck && pnpm run build",
+    "clean": "rm -rf dist .astro node_modules/.astro node_modules/.vite",
+    "check": "pnpm run check:ci && pnpm run build",
+    "check:ci": "pnpm run lint && pnpm run format:check && pnpm run typecheck && pnpm run test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint-staged": "lint-staged --concurrent false --relative",
     "lint": "pnpm run lint:eslint && pnpm run lint:markdown",
     "lint:eslint": "eslint .",
     "lint:markdown": "markdownlint-cli2 --config package.json --configPointer /markdownlint-cli2",
+    "test": "vitest run",
     "typecheck": "astro check",
     "astro": "astro",
     "dev": "astro dev",
@@ -67,7 +72,7 @@
     "*.{astro,css,js,json,jsx,md,mdx,mjs,ts,tsx,yml,yaml}": [
       "prettier --write"
     ],
-    "*.{js,mjs,ts,mdx}": [
+    "*.{astro,js,mjs,ts,mdx}": [
       "eslint"
     ],
     "*.md": [

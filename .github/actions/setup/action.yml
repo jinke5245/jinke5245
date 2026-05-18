@@ -12,7 +12,9 @@ runs:
   steps:
     - name: enable corepack
       shell: bash
-      run: corepack enable
+      run: |
+        corepack enable
+        corepack install
 
     - name: setup node
       uses: actions/setup-node@v6

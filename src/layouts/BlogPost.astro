@@ -8,9 +8,11 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, heroImageAlt } =
+  Astro.props;
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
@@ -57,15 +59,21 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
   <body>
     <Header />
-    <main>
+    <main id="content">
       <article>
-        <div class="hero-image">
-          {
-            heroImage && (
-              <Image width={1020} height={510} src={heroImage} alt="" />
-            )
-          }
-        </div>
+        {
+          /* The extra heroImageAlt check narrows the optional field while mirroring the content schema invariant. */
+          heroImage && heroImageAlt && (
+            <div class="hero-image">
+              <Image
+                width={1020}
+                height={510}
+                src={heroImage}
+                alt={heroImageAlt}
+              />
+            </div>
+          )
+        }
         <div class="prose">
           <div class="title">
             <div class="date">

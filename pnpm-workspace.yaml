@@ -1,3 +1,4 @@
+# pnpm 11 uses this package-to-boolean map for approved install scripts.
 allowBuilds:
   esbuild: true
   sharp: true

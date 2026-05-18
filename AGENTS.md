@@ -15,7 +15,9 @@ projects, and experiments.
 
 Use the repository-local `github-workflow` skill before starting any task that
 may change files, commits, branches, issues, or pull requests in this
-repository. The skill is linked at `.agents/skills/github-workflow`.
+repository. The local copy lives at `.agents/skills/github-workflow/SKILL.md`;
+`skills-lock.json` records the upstream `jinke5245/skills` source and hash used
+to provision that copy.
 
 Before editing files:
 

@@ -26,8 +26,8 @@ jobs:
       - name: build
         uses: withastro/action@v6
         env:
-          PUBLIC_BASE: /jinke5245
-          PUBLIC_SITE: https://jinke5245.github.io
+          PUBLIC_BASE: /${{ github.event.repository.name }}
+          PUBLIC_SITE: https://${{ github.repository_owner }}.github.io
         with:
           node-version: 22
           package-manager: pnpm@11.0.8

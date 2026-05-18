@@ -1,6 +1,7 @@
 import js from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import astro from 'eslint-plugin-astro';
 import * as mdx from 'eslint-plugin-mdx';
 import tseslint from 'typescript-eslint';
 
@@ -10,6 +11,7 @@ export default defineConfig(
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  ...astro.configs['flat/recommended'],
   {
     files: ['**/*.{js,mjs,cjs,ts}'],
     languageOptions: {
