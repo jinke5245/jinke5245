@@ -30,7 +30,6 @@ jobs:
           PUBLIC_SITE: https://${{ github.repository_owner }}.github.io
         with:
           node-version: 22
-          package-manager: pnpm@11.0.8
           build-cmd: pnpm run build
           out-dir: dist
 
