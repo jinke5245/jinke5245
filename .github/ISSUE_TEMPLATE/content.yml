@@ -1,0 +1,41 @@
+name: Content update
+description: Improve profile README, blog posts, notes, project pages, or site copy.
+title: 'docs: '
+body:
+  - type: dropdown
+    id: content-area
+    attributes:
+      label: Content area
+      options:
+        - GitHub profile README
+        - Blog post
+        - Notes
+        - Project page
+        - Site copy
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Purpose
+      description: What should this content help readers understand, feel, or do?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: List the content to add, revise, remove, or leave untouched.
+    validations:
+      required: true
+  - type: textarea
+    id: voice
+    attributes:
+      label: Voice notes
+      description: Mention tone, audience, references, or wording preferences.
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation
+      description: List review steps, lint commands, or rendered-page checks.

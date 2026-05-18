@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import {
+  getActiveNavigationState,
+  resolveNavigationHref,
+} from '../utils/navigation';
+
+type Props = HTMLAttributes<'a'>;
+
+const { href, class: className, ...props } = Astro.props;
+const hrefValue = href?.toString() ?? '';
+const isActive = getActiveNavigationState(Astro.url.pathname, hrefValue);
+// Unsafe URL schemes fail the build so navigation links cannot silently ship dangerous hrefs.
+const resolvedHref = resolveNavigationHref(hrefValue);
+---
+
+<a
+  href={resolvedHref}
+  class:list={[className, { active: isActive }]}
+  {...props}
+>
+  <slot />
+</a>
+<style>
+  a {
+    display: inline-block;
+    text-decoration: none;
+  }
+  a.active {
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+</style>

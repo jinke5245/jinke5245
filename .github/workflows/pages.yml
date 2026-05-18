@@ -1,0 +1,50 @@
+name: pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+
+      - name: build
+        uses: withastro/action@v6
+        env:
+          PUBLIC_BASE: /${{ github.event.repository.name }}
+          PUBLIC_SITE: https://${{ github.repository_owner }}.github.io
+        with:
+          node-version: 22
+          package-manager: pnpm@11.0.8
+          build-cmd: pnpm run build
+          out-dir: dist
+
+  deploy:
+    name: deploy
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

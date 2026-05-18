@@ -1,0 +1,69 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+---
+
+<a class="skip-link" href="#content">Skip to content</a>
+<header>
+  <nav>
+    <div class="site-title"><HeaderLink href="/">{SITE_TITLE}</HeaderLink></div>
+    <div class="internal-links">
+      <HeaderLink href="/">Home</HeaderLink>
+      <HeaderLink href="/blog">Blog</HeaderLink>
+      <HeaderLink href="/about">About</HeaderLink>
+    </div>
+  </nav>
+</header>
+<style>
+  header {
+    margin: 0;
+    padding: 0 1em;
+    background: white;
+    box-shadow: 0 2px 8px rgba(var(--black), 5%);
+  }
+  .site-title {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 700;
+  }
+
+  .site-title a,
+  .site-title a.active {
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav a {
+    padding: 1em 0.5em;
+    color: rgb(var(--black));
+    border-bottom: 4px solid transparent;
+    text-decoration: none;
+  }
+  nav a.active {
+    text-decoration: none;
+    border-bottom-color: var(--accent);
+  }
+  .skip-link {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1;
+    padding: 0.5rem 0.75rem;
+    background: rgb(var(--black));
+    color: white;
+    transform: translateY(-200%);
+  }
+  .skip-link:focus {
+    color: white;
+    transform: translateY(0);
+  }
+  @media (max-width: 720px) {
+    nav {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>
